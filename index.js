@@ -11,6 +11,8 @@ const helmet = require('helmet')
 const compression = require('compression')
 
 // import controllers
+const articleController = require('./controllers/articles')
+const userController = require('./controllers/users')
 
 // config app
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -36,6 +38,10 @@ app.use((req, res, next) => {
   res.locals.title = 'Code Stuff'
   next()
 })
+
+// set controllers
+app.use('/articles', articleController)
+app.use('/users', userController)
 
 // render home page
 app.get('/', (req, res) => {

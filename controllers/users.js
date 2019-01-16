@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 require('../config/passport')(passport)
-const isLoggedIn = require('../config/utils').isLoggedIn
+const { isLoggedIn } = require('../config/utilities')
 
 router.get('/login', (req, res) => {
   res.render('users/login', { message: req.flash('loginMessage') })
