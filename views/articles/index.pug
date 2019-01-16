@@ -1,0 +1,10 @@
+extends ../layout.pug
+
+block content
+    h4 All Articles:
+    each article in articles
+        .card
+            .card-body
+                a(href=`/articles/${article.id}`)
+                    h5.card-title #{article.title}
+

@@ -3,6 +3,11 @@ const router = express.Router()
 const Article = require('../models/Article')
 const { isLoggedIn } = require('../config/utilities')
 
+// form for new article
+router.get('/new', (req, res) => {
+  res.render('articles/new')
+})
+
 // edit form
 router.get('/edit/:id', (req, res) => {
   Article.findOne({ _id: req.params.id })
@@ -47,11 +52,6 @@ router.delete('/:id', (req, res) => {
     })
 })
 
-// form for new article
-router.get('/new', isLoggedIn, (req, res) => {
-  res.render('articles/new')
-})
-
 // index
 router.get('/', (req, res) => {
   Article.find({})
@@ -65,9 +65,7 @@ router.get('/', (req, res) => {
 
 // post
 router.post('/', (req, res) => {
-  Article.create({
-    //   details
-  })
+  Article.create(req.body, { createdBy: req.user.displayName })
     .then(article => {
       res.render('articles/view', { article: article })
     })

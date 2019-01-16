@@ -1,0 +1,23 @@
+extends ../layout.pug
+
+block content
+    .card
+        .card-body
+            h4.card-title Add Article:
+            form(method="POST" action='/articles')
+                .form-group
+                    label(for='url') URL:  
+                    input.form-control(type='text' name='url' required)
+                .form-group
+                    label(for='title') Title:
+                    input.form-control(type='text' name='title' required)
+                .form-group
+                    label(for='tags') Tags:
+                    input.form-control(type='textarea' name='tags')
+                .form-group
+                    label(for='notes') Notes:
+                    input.form-control(type='textarea' name='notes')
+                button.btn(type="submit") Create
+                button.btn(type="reset") Clear
+
+
