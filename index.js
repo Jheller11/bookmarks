@@ -45,12 +45,12 @@ app.use('/users', userController)
 
 // render home page
 app.get('/', (req, res) => {
-  res.render('home')
+  res.redirect('/articles')
 })
 
-// redirect on missing route to home page with message
+// 404
 app.get('/*', (req, res) => {
-  res.render('home', {
+  res.render('404', {
     message: 'The page you requested does not exist. Please try again.'
   })
 })
