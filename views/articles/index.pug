@@ -3,8 +3,10 @@ extends ../layout.pug
 block content
     .nav
         a.nav-link(href='/articles') All
-        if (user)
-            a.nav-link(href='/articles/favorites') Favorites
+        a.nav-link(href='/articles/unread') Unread
+        a.nav-link(href='/articles/read') Read
+        a.nav-link(href='/articles/new') New 
+            i.far.fa-plus-square
     .list-group
         each article in articles
             a.list-group-item.list-group-item-action(href=`/articles/${article.id}`) #{article.title}

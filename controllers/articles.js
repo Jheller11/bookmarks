@@ -30,8 +30,38 @@ router.get('/read', (req, res) => {
     })
 })
 
+// mark as unread
+router.put('/unread/:id', (req, res) => {
+  Article.findOneAndUpdate(
+    { _id: req.params.id },
+    { read: false },
+    { new: true }
+  )
+    .then(article => {
+      res.render('articles/view', { article: article })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+// mark as read
+router.put('/read/:id', (req, res) => {
+  Article.findOneAndUpdate(
+    { _id: req.params.id },
+    { read: true },
+    { new: true }
+  )
+    .then(article => {
+      res.render('articles/view', { article: article })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
 // edit form
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', isLoggedIn, (req, res) => {
   Article.findOne({ _id: req.params.id })
     .then(article => {
       res.render('articles/edit', { article: article })
@@ -53,7 +83,7 @@ router.get('/:id', (req, res) => {
 })
 
 // update
-router.put('/:id', (req, res) => {
+router.put('/:id', isLoggedIn, (req, res) => {
   Article.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(article => {
       res.render('articles/view', { article: article })
@@ -65,7 +95,8 @@ router.put('/:id', (req, res) => {
 
 // delete
 router.delete('/:id', (req, res) => {
-  Article.findOneAndRemove({ _id: req.params.id })
+  console.log('here')
+  Article.findOneAndDelete({ _id: req.params.id })
     .then(() => {
       res.redirect('/articles')
     })
