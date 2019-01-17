@@ -4,8 +4,30 @@ const Article = require('../models/Article')
 const { isLoggedIn } = require('../config/utilities')
 
 // form for new article
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   res.render('articles/new')
+})
+
+// only unread articles
+router.get('/unread', (req, res) => {
+  Article.find({ read: false })
+    .then(articles => {
+      res.render('articles/index', { articles: articles })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+// only read articles
+router.get('/read', (req, res) => {
+  Article.find({ read: true })
+    .then(articles => {
+      res.render('articles/index', { articles: articles })
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 // edit form
@@ -64,10 +86,16 @@ router.get('/', (req, res) => {
 })
 
 // post
-router.post('/', (req, res) => {
-  Article.create(req.body, { createdBy: req.user.displayName })
+router.post('/', isLoggedIn, (req, res) => {
+  Article.create({
+    title: req.body.title,
+    url: req.body.url,
+    tags: req.body.tags.split(', '),
+    notes: req.body.notes,
+    createdBy: req.user.id
+  })
     .then(article => {
-      res.render('articles/view', { article: article })
+      res.redirect('/articles')
     })
     .catch(err => {
       console.log(err)

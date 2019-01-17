@@ -8,17 +8,19 @@ html
     body
         nav.p-2.nav.navbar-dark.bg-dark
             a.navbar-brand(href='/') Code Stuff
-            ul.align-right
-            if (!user)
-                li
-                    a.nav-item.nav-link.text-light(href='/users/login') Login
-                li
-                    a.nav-item.nav-link.text-light(href='/users/signup') Register
-            else
-                li
-                    a.nav-item.nav-link.text-light(href='/articles/new') Post
-                li
-                    a.nav-item.nav-link.text-light(href='/articles/favorites') Favorites
+            ul.nav
+                li.nav-item
+                    a.nav-link.text-light(href='/articles') Articles
+                if (!user)
+                    li.nav-item
+                        a.nav-link.text-light(href='/users/login') Login
+                    li.nav-item
+                        a.nav-link.text-light(href='/users/signup') Register
+                else
+                    li.nav-item
+                        a.nav-link.text-light(href='/articles/new') New
+                    li.nav-item
+                        a.nav-link.text-light(href='/articles/favorites') Favorites
 
         //- main content
         main.p-2.bg-light.text-dark

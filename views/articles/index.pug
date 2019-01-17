@@ -1,10 +1,11 @@
 extends ../layout.pug
 
 block content
-    h4 All Articles:
-    each article in articles
-        .card
-            .card-body
-                a(href=`/articles/${article.id}`)
-                    h5.card-title #{article.title}
+    .nav
+        a.nav-link(href='/articles') All
+        if (user)
+            a.nav-link(href='/articles/favorites') Favorites
+    .list-group
+        each article in articles
+            a.list-group-item.list-group-item-action(href=`/articles/${article.id}`) #{article.title}
 
