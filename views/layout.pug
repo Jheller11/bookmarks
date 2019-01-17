@@ -6,14 +6,26 @@ html
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous")
         block head
     body
-        //- navbar
+        nav.p-2.nav.navbar-dark.bg-dark
+            a.navbar-brand(href='/') Code Stuff
+            ul.align-right
+            if (!user)
+                li
+                    a.nav-item.nav-link.text-light(href='/users/login') Login
+                li
+                    a.nav-item.nav-link.text-light(href='/users/signup') Register
+            else
+                li
+                    a.nav-item.nav-link.text-light(href='/articles/new') Post
+                li
+                    a.nav-item.nav-link.text-light(href='/articles/favorites') Favorites
 
         //- main content
-        main
+        main.p-2.bg-light.text-dark
             if (message && message.length > 0)
                 .alert.alert-warning(role='alert') #{message}
             block content
         //- footer
-        footer
+        footer.p-2
 
         block script
