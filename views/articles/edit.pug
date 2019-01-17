@@ -1,0 +1,23 @@
+extends ../layout.pug
+
+block content
+    .card
+        .card-body
+            h4.card-title Edit Article:
+            form(method="POST" action=`/articles/${article.id}?_method=PUT`)
+                .form-group
+                    label(for='url') URL:  
+                    input.form-control(type='text' name='url' value=`${article.url}` required)
+                .form-group
+                    label(for='title') Title:
+                    input.form-control(type='text' name='title' value=`${article.title}` required)
+                .form-group
+                    label(for='tags') Tags:
+                    input.form-control(type='textarea' name='tags' value=`${article.tags.join(', ')}`)
+                .form-group
+                    label(for='notes') Notes:
+                    input.form-control(type='textarea' name='notes' value=`${article.notes}`)
+                button.btn.btn-outline-dark(type="submit") Save Changes
+                button.btn.btn-outline-dark(type="reset") Reset
+
+
