@@ -35,7 +35,7 @@ app.set('view engine', 'pug')
 // pass title and user to all views
 app.use((req, res, next) => {
   res.locals.user = req.user
-  res.locals.title = 'Code Stuff'
+  res.locals.title = 'Code Bookmarks'
   next()
 })
 

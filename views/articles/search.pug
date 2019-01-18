@@ -8,8 +8,10 @@ block content
             input.form-control.mr-2(type='text' name='query' required)
             button.btn.btn-outline-dark.nav-link(type='submit') 
                 i.fas.fa-search
+
+    div.text-flame #{articles.length} matching articles found.
     if (articles.length < 1)
-        p No matching articles found.
+        p Please try again.
     .list-group
         each article in articles
             if (article.read)

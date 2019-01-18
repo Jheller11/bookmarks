@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Article = require('../models/Article')
 const User = require('../models/User')
-const { isLoggedIn } = require('../config/utilities')
+const { isLoggedIn, isAuthor } = require('../config/utilities')
 
 // form for new article
 router.get('/new', isLoggedIn, (req, res) => {
@@ -58,7 +58,7 @@ router.get('/read', (req, res) => {
 })
 
 // mark as unread
-router.put('/unread/:id', (req, res) => {
+router.put('/unread/:id', isAuthor, (req, res) => {
   Article.findOneAndUpdate(
     { _id: req.params.id },
     { read: false },
@@ -73,7 +73,7 @@ router.put('/unread/:id', (req, res) => {
 })
 
 // mark as read
-router.put('/read/:id', (req, res) => {
+router.put('/read/:id', isAuthor, (req, res) => {
   Article.findOneAndUpdate(
     { _id: req.params.id },
     { read: true },
@@ -88,7 +88,7 @@ router.put('/read/:id', (req, res) => {
 })
 
 // edit form
-router.get('/edit/:id', isLoggedIn, (req, res) => {
+router.get('/edit/:id', isAuthor, (req, res) => {
   Article.findOne({ _id: req.params.id })
     .then(article => {
       res.render('articles/edit', { article: article })
@@ -110,7 +110,7 @@ router.get('/:id', (req, res) => {
 })
 
 // update
-router.put('/:id', isLoggedIn, (req, res) => {
+router.put('/:id', isAuthor, (req, res) => {
   let newTags = req.body.tags.filter(tag => tag.length > 0)
   req.body.tags = newTags
   Article.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })

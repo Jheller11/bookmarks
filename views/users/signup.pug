@@ -7,10 +7,10 @@ block content
             form(method="POST" action='/users/signup')
                 .form-group
                     label(for='email') Email Address:
-                    input.form-control(type='text' placeholder='jdoe@gmail.com' name='email' required)
+                    input.form-control(type='text' placeholder='jdoe@gmail.com' name='email' autocomplete='username' required)
                 .form-group
                     label(for='password') Password:
-                    input.form-control(type='password' name='password' minlength='8' required)
+                    input.form-control(type='password' name='password' minlength='8' autocomplete='new-password' required)
                     small.form-text.text-muted Password must be at least 8 characters.
                 .form-group
                     label(for='displayName') Username:
