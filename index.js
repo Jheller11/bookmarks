@@ -13,6 +13,7 @@ const compression = require('compression')
 // import controllers
 const articleController = require('./controllers/articles')
 const userController = require('./controllers/users')
+const adminController = require('./controllers/admin')
 
 // config app
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 // set controllers
 app.use('/articles', articleController)
 app.use('/users', userController)
+app.use('/admin', adminController)
 
 // render info page
 app.get('/about', (req, res) => {

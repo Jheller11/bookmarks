@@ -31,4 +31,7 @@ block content
                     button.btn.nav-link.text-flame(type='submit') Mark as Read            
             form(method='POST' action=`/articles/${article.id}?_method=DELETE`)
                 button.btn.nav-link.text-flame(type='submit') Delete
+        else
+            a.btn.nav-link.text-flame.disabled Edit
+            a.btn.nav-link.text-flame.disabled Delete  
   

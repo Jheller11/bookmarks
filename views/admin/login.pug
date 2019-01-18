@@ -1,0 +1,12 @@
+extends ../layout.pug
+
+block content
+    .card
+        .card-body
+            h6.card-title Admin Access
+            form(action="/admin/login" method="POST")
+                .form-group
+                    label(for='passcode') Enter code:  
+                    input.form-control(type='password' name='passcode' autocomplete='off' required)                
+                    small.text-muted Access code required.
+                button.btn.border-flame(type='submit') Verify
