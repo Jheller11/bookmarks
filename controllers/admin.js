@@ -11,13 +11,18 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res) => {
   if (req.body.passcode) {
     if (req.body.passcode === process.env.ADMIN_PASSCODE) {
-      res.render('admin/dashboard')
+      res.redirect('/admin/dashboard')
     } else {
       res.render('admin/login', {
         message: 'Incorrect code. Please try again.'
       })
     }
   }
+})
+
+//  view dashboard
+router.get('/dashboard', (req, res) => {
+  res.render('admin/dashboard')
 })
 
 module.exports = router

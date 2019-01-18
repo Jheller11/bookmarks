@@ -16,6 +16,7 @@ const path = require('path')
 const articleController = require('./controllers/articles')
 const userController = require('./controllers/users')
 const adminController = require('./controllers/admin')
+const videoController = require('./controllers/videos')
 
 // config app
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -47,6 +48,7 @@ app.use((req, res, next) => {
 app.use('/articles', articleController)
 app.use('/users', userController)
 app.use('/admin', adminController)
+app.use('/videos', videoController)
 
 // render info page
 app.get('/about', (req, res) => {
