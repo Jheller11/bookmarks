@@ -6,9 +6,10 @@ block content
             a.nav-link(href='/articles') All
             a.nav-link(href='/articles/unread') Unread
             a.nav-link(href='/articles/read') Read
-            a.nav-link(href='/articles/my_articles') My Articles
-            a.nav-link(href='/articles/new') New 
-                i.far.fa-plus-square
+            if (user)
+                a.nav-link(href='/articles/my_articles') My Articles
+                a.nav-link(href='/articles/new') New 
+                    i.far.fa-plus-square
         form.form-inline(method='POST' action="/articles/search")
             label.mr-2(for='query') Keyword Search:  
             input.form-control.mr-2(type='text' name='query' required)
@@ -33,4 +34,6 @@ block content
                 .card.my-1
                     .card-body
                         .card-text.text-secondary Articles, tutorials, and documentation.
+                            if (!user)
+                                div.mt-2 Sign in or create and save to create a personalized list.
 

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Article = require('../models/Article')
+const User = require('../models/User')
 const { isLoggedIn } = require('../config/utilities')
 
 // form for new article
@@ -146,19 +147,22 @@ router.get('/', (req, res) => {
 // post
 router.post('/', isLoggedIn, (req, res) => {
   let newTags = req.body.tags.filter(tag => tag.length > 0)
-  Article.create({
-    title: req.body.title,
-    url: req.body.url,
-    tags: newTags,
-    notes: req.body.notes,
-    createdBy: req.user.id
+  User.findOne({ _id: req.user.id }).then(user => {
+    let userInfo = { name: user.local.displayName, id: user.id }
+    Article.create({
+      title: req.body.title,
+      url: req.body.url,
+      tags: newTags,
+      notes: req.body.notes,
+      createdBy: userInfo
+    })
+      .then(article => {
+        res.redirect('/articles')
+      })
+      .catch(err => {
+        console.log(err)
+      })
   })
-    .then(article => {
-      res.redirect('/articles')
-    })
-    .catch(err => {
-      console.log(err)
-    })
 })
 
 // 404

@@ -4,24 +4,30 @@ block content
     .nav.d-flex.justify-content-between
         a.nav-link(href='/articles') Back
     h4 #{article.title}
-    a(href=`${article.url}`) View 
-        i.fa.fa-external-link-alt
-    h6 Created By: #{article.createdBy}
-    h6 Date Added: #{article.created}
-    ul.tag-list
-    h6 Tags:
+    .row
+        .col Created By: #{article.createdBy.name}
+        - let d = new Date(article.created)
+        - let year = d.getFullYear()
+        - let month = d.getMonth() + 1
+        - let date = d.getDate()
+        .col Date Added: #{month}-#{date}-#{year}
+    div Tags:
+    ul.d-flex
         each tag in article.tags
-            li #{tag}
+            li.list-group-item #{tag}
     h6 Notes:
     div #{article.notes}
     .nav
-        a.nav-link(href=`/articles/edit/${article.id}`) Edit
+        .navbar-text Actions:
+        a.btn.nav-link.text-flame(href=`${article.url}`) View 
+            i.fa.fa-external-link-alt
+        a.btn.nav-link.text-flame(href=`/articles/edit/${article.id}`) Edit
         if (article.read)
             form(method='POST' action=`/articles/unread/${article.id}?_method=PUT`)
-                button.btn.nav-link(type='submit') Mark as Unread
+                button.btn.nav-link.text-flame(type='submit') Mark as Unread
         else
             form(method='POST' action=`/articles/read/${article.id}?_method=PUT`)
-                button.btn.nav-link(type='submit') Mark as Read            
+                button.btn.nav-link.text-flame(type='submit') Mark as Read            
         form(method='POST' action=`/articles/${article.id}?_method=DELETE`)
-            button.btn.nav-link(type='submit') Delete
+            button.btn.nav-link.text-flame(type='submit') Delete
   

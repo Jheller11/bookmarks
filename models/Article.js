@@ -16,8 +16,8 @@ const articleSchema = new mongoose.Schema({
     default: []
   },
   createdBy: {
-    type: String,
-    required: true
+    name: { type: String, required: true },
+    id: { type: String, required: true }
   },
   notes: {
     type: String
