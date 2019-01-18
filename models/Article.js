@@ -20,8 +20,7 @@ const articleSchema = new mongoose.Schema({
     required: true
   },
   notes: {
-    type: String,
-    required: true
+    type: String
   },
   title: {
     type: String,

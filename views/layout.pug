@@ -4,6 +4,8 @@ html
         //- stylesheets
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous")
+        link(rel="stylesheet" href="/stylesheets/colors.css")
+        link(rel="stylesheet" href="/stylesheets/main.css")
         block head
     body
         nav.p-2.nav.navbar-dark.bg-dark
@@ -25,9 +27,9 @@ html
         //- main content
         main.p-2.bg-light.text-dark
             if (message && message.length > 0)
-                .alert.alert-warning(role='alert') #{message}
+                .alert.alert-warning.bg-flame.text-light(role='alert') #{message}
             block content
         //- footer
-        footer.p-2
+        footer.p-2.bg-shadow.text-dark
 
         block script

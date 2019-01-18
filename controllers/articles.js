@@ -8,6 +8,32 @@ router.get('/new', isLoggedIn, (req, res) => {
   res.render('articles/new')
 })
 
+// keyword search
+router.post('/search', (req, res) => {
+  let matchingArticles = []
+  Article.find({})
+    .then(articles => {
+      articles.forEach(article => {
+        if (article.tags.includes(req.body.query)) {
+          matchingArticles.push(article)
+        }
+      })
+    })
+    .then(() => {
+      res.render('articles/search', { articles: matchingArticles })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+// only articles added by an individual user
+router.get('/my_articles', isLoggedIn, (req, res) => {
+  Article.find({ createdBy: req.user.id }).then(articles => {
+    res.render('articles/index', { articles: articles })
+  })
+})
+
 // only unread articles
 router.get('/unread', (req, res) => {
   Article.find({ read: false })
@@ -84,6 +110,8 @@ router.get('/:id', (req, res) => {
 
 // update
 router.put('/:id', isLoggedIn, (req, res) => {
+  let newTags = req.body.tags.filter(tag => tag.length > 0)
+  req.body.tags = newTags
   Article.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(article => {
       res.render('articles/view', { article: article })
@@ -95,7 +123,6 @@ router.put('/:id', isLoggedIn, (req, res) => {
 
 // delete
 router.delete('/:id', (req, res) => {
-  console.log('here')
   Article.findOneAndDelete({ _id: req.params.id })
     .then(() => {
       res.redirect('/articles')
@@ -118,10 +145,11 @@ router.get('/', (req, res) => {
 
 // post
 router.post('/', isLoggedIn, (req, res) => {
+  let newTags = req.body.tags.filter(tag => tag.length > 0)
   Article.create({
     title: req.body.title,
     url: req.body.url,
-    tags: req.body.tags.split(', '),
+    tags: newTags,
     notes: req.body.notes,
     createdBy: req.user.id
   })

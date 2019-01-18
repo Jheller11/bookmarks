@@ -1,0 +1,47 @@
+.text-silver {
+  color: #848c8e;
+}
+
+.text-blue {
+  color: #1b4079;
+}
+
+.text-shadow {
+  color: #bfb7b6;
+}
+
+.text-flame {
+  color: #d0502a;
+}
+
+.bg-silver {
+  background-color: #848c8e;
+}
+
+.bg-blue {
+  background-color: #1b4079;
+}
+
+.bg-shadow {
+  background-color: #bfb7b6;
+}
+
+.bg-flame {
+  background-color: #d0502a;
+}
+
+.border-silver {
+  border: 1px solid #848c8e;
+}
+
+.border-blue {
+  border: 1px solid #1b4079;
+}
+
+.border-shadow {
+  border: 1px solid #bfb7b6;
+}
+
+.border-flame {
+  border: 1px solid #d0502a;
+}

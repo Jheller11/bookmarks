@@ -11,9 +11,19 @@ block content
                 .form-group
                     label(for='title') Title:
                     input.form-control(type='text' name='title' value=`${article.title}` required)
-                .form-group
-                    label(for='tags') Tags:
-                    input.form-control(type='textarea' name='tags' value=`${article.tags.join(', ')}`)
+                .row
+                    .col
+                        label(for='tags') Tags:
+                    .col
+                        input.form-control(type='text' name='tags' value=`${article.tags[0] !== 'undefined' ? article.tags[2] : ''}`)
+                    .col
+                        input.form-control(type='text' name='tags' value=`${article.tags[1] !== 'undefined' ? article.tags[2] : ''}`)
+                    .col
+                        input.form-control(type='text' name='tags' value=`${article.tags[2] !== 'undefined' ? article.tags[2] : ''}`)
+                    .col
+                        input.form-control(type='text' name='tags' value=`${article.tags[3] !== 'undefined' ? article.tags[2] : ''}`)
+                    .col
+                        input.form-control(type='text' name='tags' value=`${article.tags[4] !== 'undefined' ? article.tags[2] : ''}`)
                 .form-group
                     label(for='notes') Notes:
                     input.form-control(type='textarea' name='notes' value=`${article.notes}`)

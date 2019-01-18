@@ -11,13 +11,24 @@ block content
                 .form-group
                     label(for='title') Title:
                     input.form-control(type='text' name='title' required)
-                .form-group
-                    label(for='tags') Tags:
-                    input.form-control(type='textarea' name='tags')
+                .row
+                    .col
+                        label(for='tags') Tags:
+                    .col
+                        input.form-control(type='text' name='tags')
+                    .col
+                        input.form-control(type='text' name='tags')
+                    .col
+                        input.form-control(type='text' name='tags')
+                    .col
+                        input.form-control(type='text' name='tags')
+                    .col
+                        input.form-control(type='text' name='tags')
+
                 .form-group
                     label(for='notes') Notes:
                     input.form-control(type='textarea' name='notes')
-                button.btn.btn-outline-dark(type="submit") Create
+                button.btn.btn-outline-dark.mr-4(type="submit") Create
                 button.btn.btn-outline-dark(type="reset") Clear
 
 

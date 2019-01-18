@@ -2,26 +2,14 @@ extends ../layout.pug
 
 block content
     .nav.d-flex.justify-content-between
-        div.d-flex.flex-row
-            a.nav-link(href='/articles') All
-            a.nav-link(href='/articles/unread') Unread
-            a.nav-link(href='/articles/read') Read
-            a.nav-link(href='/articles/my_articles') My Articles
-            a.nav-link(href='/articles/new') New 
-                i.far.fa-plus-square
+        a.nav-link(href='/articles') Back
         form.form-inline(method='POST' action="/articles/search")
             label.mr-2(for='query') Keyword Search:  
             input.form-control.mr-2(type='text' name='query' required)
             button.btn.btn-outline-dark.nav-link(type='submit') 
                 i.fas.fa-search
-
-    
-    .card.d-flex.flex-row
-        span.mr-4 Unread 
-            i.far.fa-square.text-flame
-        span Read 
-            i.far.fa-square.text-shadow
-
+    if (articles.length < 1)
+        p No matching articles found.
     .list-group
         each article in articles
             if (article.read)
