@@ -9,6 +9,8 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const helmet = require('helmet')
 const compression = require('compression')
+const favicon = require('serve-favicon')
+const path = require('path')
 
 // import controllers
 const articleController = require('./controllers/articles')
@@ -22,6 +24,7 @@ app.use(cookieParser())
 app.use(compression())
 app.use(helmet())
 app.use(express.static('public'))
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')))
 
 // passport
 app.use(session({ secret: 'liverpool' }))
