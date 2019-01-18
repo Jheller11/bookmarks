@@ -16,16 +16,21 @@ block content
                 i.fas.fa-search
 
     
-    .card.d-flex.flex-row
+    .card.d-flex.flex-row.p-2
         span.mr-4 Unread 
             i.far.fa-square.text-flame
         span Read 
             i.far.fa-square.text-shadow
-
-    .list-group
-        each article in articles
-            if (article.read)
-                a.list-group-item.list-group-item-action.border-shadow(href=`/articles/${article.id}`) #{article.title}                
-            else 
-                    a.list-group-item.list-group-item-action.border-flame(href=`/articles/${article.id}`) #{article.title}
+    .container-fluid
+        .row
+            .list-group.col-8
+                each article in articles
+                    if (article.read)
+                        a.my-1.list-group-item.list-group-item-action.border-shadow(href=`/articles/${article.id}`) #{article.title}                
+                    else 
+                        a.my-1.list-group-item.list-group-item-action.border-flame(href=`/articles/${article.id}`) #{article.title}
+            .col-4
+                .card.my-1
+                    .card-body
+                        .card-text.text-secondary Articles, tutorials, and documentation.
 

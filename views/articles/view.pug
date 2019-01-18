@@ -1,6 +1,8 @@
 extends ../layout.pug
 
 block content
+    .nav.d-flex.justify-content-between
+        a.nav-link(href='/articles') Back
     h4 #{article.title}
     a(href=`${article.url}`) View 
         i.fa.fa-external-link-alt
