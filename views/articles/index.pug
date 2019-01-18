@@ -4,12 +4,16 @@ block content
     .nav.d-flex.justify-content-between
         div.d-flex.flex-row
             a.nav-link(href='/articles') All
+            a.nav-link(href='/articles/unread') Unread
+            a.nav-link(href='/articles/read') Read
             if (user)
-                a.nav-link(href='/articles/unread') Unread
-                a.nav-link(href='/articles/read') Read
                 a.nav-link(href='/articles/my_articles') My Articles
                 a.nav-link(href='/articles/new') New 
                     i.far.fa-plus-square
+            else
+                a.nav-link.disabled(href='/articles/my_articles') My Articles
+                a.nav-link.disabled(href='/articles/new') New 
+                    i.far.fa-plus-square 
         form.form-inline(method='POST' action="/articles/search")
             label.mr-2(for='query') Keyword Search:  
             input.form-control.mr-2(type='text' name='query' required)
@@ -26,13 +30,19 @@ block content
             .list-group.col-8
                 each article in articles
                     if (article.read)
-                        a.my-1.list-group-item.list-group-item-action.border-shadow(href=`/articles/${article.id}`) #{article.title}                
+                        a.d-flex.flex-row.justify-content-between.my-1.list-group-item.list-group-item-action.border-shadow(href=`/articles/${article.id}`) 
+                            div.w-75.text-truncate #{article.title}
+                            div.text-secondary #{article.createdBy.name}               
                     else 
-                        a.my-1.list-group-item.list-group-item-action.border-flame(href=`/articles/${article.id}`) #{article.title}
+                        a.d-flex.flex-row.justify-content-between.my-1.list-group-item.list-group-item-action.border-flame(href=`/articles/${article.id}`) 
+                            div.w-75.text-truncate #{article.title}
+                            div.text-secondary #{article.createdBy.name}
             .col-4
                 .card.my-1
                     .card-body
                         .card-text.text-secondary Articles, tutorials, and documentation.
                             if (!user)
                                 div.mt-2 Sign in or create and save to create a personalized list.
+                            else
+                                div.mt-2 Click "My Articles" above to view only articles you've posted or "All" to see posts from all users.
 

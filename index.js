@@ -43,6 +43,11 @@ app.use((req, res, next) => {
 app.use('/articles', articleController)
 app.use('/users', userController)
 
+// render info page
+app.get('/about', (req, res) => {
+  res.render('about')
+})
+
 // render home page
 app.get('/', (req, res) => {
   res.redirect('/articles')

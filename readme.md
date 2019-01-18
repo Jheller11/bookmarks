@@ -11,6 +11,7 @@ This application will allow me to bookmark and save all useful articles, stack o
 - MongoDB
 - Pug (view engine)
 - Passport (authentication)
+- Bootstrap
 
 ## Deployed Application
 

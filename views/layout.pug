@@ -30,6 +30,13 @@ html
                 .alert.alert-warning.bg-flame.text-light(role='alert') #{message}
             block content
         //- footer
-        footer.p-2.bg-shadow.text-dark
+        footer.p-2.bg-shadow.text-dark.container-fluid
+            .row
+                .col
+                .col-4
+                    a(href='/about') About
+                .col-4 Created by Jeff Heller: 
+                    a(href="mailto:heller.jeffrey@gmail.com") heller.jeffrey@gmail.com
+                .col
 
         block script
