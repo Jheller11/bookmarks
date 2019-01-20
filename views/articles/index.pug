@@ -31,13 +31,13 @@ block content
                 .card-body
                     each article in articles
                         if (article.read)
-                            div
+                            div.mt-1
                                 a.d-flex.flex-row.justify-content-between(href=`/articles/${article.id}`) 
                                     i.far.fa-check-circle.text-blue
                                     div.w-75.text-truncate.text-dark #{article.title}
                                     div.text-secondary #{article.createdBy.name}               
                         else 
-                            div
+                            div.mt-1
                                 a.d-flex.flex-row.justify-content-between(href=`/articles/${article.id}`) 
                                     i.far.fa-circle.text-flame
                                     div.w-75.text-truncate.text-dark #{article.title}

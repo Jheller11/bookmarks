@@ -20,6 +20,10 @@ const utils = {
         })
       }
     })
+  },
+  formatTags: arr => {
+    let tags = arr.filter(tag => tag.length > 0)
+    return tags.map(tag => tag.toLowerCase())
   }
 }
 

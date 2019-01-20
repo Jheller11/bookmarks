@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Article = require('../models/Article')
 const User = require('../models/User')
-const { isLoggedIn, isAuthor } = require('../config/utilities')
+const { isLoggedIn, isAuthor, formatTags } = require('../config/utilities')
 
 // form for new article
 router.get('/new', isLoggedIn, (req, res) => {
@@ -15,7 +15,7 @@ router.post('/search', (req, res) => {
   Article.find({})
     .then(articles => {
       articles.forEach(article => {
-        if (article.tags.includes(req.body.query)) {
+        if (article.tags.includes(req.body.query.toLowerCase())) {
           matchingArticles.push(article)
         }
       })
@@ -111,7 +111,7 @@ router.get('/:id', (req, res) => {
 
 // update
 router.put('/:id', isAuthor, (req, res) => {
-  let newTags = req.body.tags.filter(tag => tag.length > 0)
+  let newTags = formatTags(req.body.tags)
   req.body.tags = newTags
   Article.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then(article => {
@@ -146,7 +146,7 @@ router.get('/', (req, res) => {
 
 // post
 router.post('/', isLoggedIn, (req, res) => {
-  let newTags = req.body.tags.filter(tag => tag.length > 0)
+  let newTags = formatTags(req.body.tags)
   User.findOne({ _id: req.user.id }).then(user => {
     let userInfo = { name: user.local.displayName, id: user.id }
     Article.create({
