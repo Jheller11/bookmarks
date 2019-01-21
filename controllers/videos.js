@@ -7,6 +7,25 @@ router.get('/new', (req, res) => {
   res.render('videos/new')
 })
 
+// keyword search
+router.post('/search', (req, res) => {
+  let matchingVideos = []
+  Video.find({})
+    .then(videos => {
+      videos.forEach(video => {
+        if (video.tags.includes(req.body.query.toLowerCase())) {
+          matchingVideos.push(video)
+        }
+      })
+    })
+    .then(() => {
+      res.render('videos/search', { videos: matchingVideos })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
 // post new video
 router.post('/', (req, res) => {
   Video.create(req.body)

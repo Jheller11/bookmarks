@@ -21,6 +21,9 @@ const videoSchema = new mongoose.Schema({
   youtubeId: {
     type: String,
     required: true
+  },
+  notes: {
+    type: String
   }
 })
 
