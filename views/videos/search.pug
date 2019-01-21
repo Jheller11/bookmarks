@@ -1,0 +1,21 @@
+extends ../layout.pug
+
+block content
+    .nav.d-flex.justify-content-between
+        a.nav-link(href='/videos') Back
+        form.form-inline(method='POST' action="/videos/search")
+            label.mr-2(for='query') Keyword Search:  
+            input.form-control.mr-2(type='text' name='query' required)
+            button.btn.btn-outline-dark.nav-link(type='submit') 
+                i.fas.fa-search
+
+    div.text-flame #{videos.length} matching articles found.
+    if (videos.length < 1)
+        p Please try again.
+    .list-group
+        each video in videos
+            if (video.read)
+                a.list-group-item.list-group-item-action.border-shadow(href=`/videos/${video.id}`) #{video.title}                
+            else 
+                    a.list-group-item.list-group-item-action.border-flame(href=`/videos/${video.id}`) #{video.title}
+

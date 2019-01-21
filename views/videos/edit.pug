@@ -1,0 +1,31 @@
+extends ../layout.pug
+
+block content
+    .card
+        .card-body
+            h4.card-title Edit Video:
+            form(method="POST" action=`/videos/${video.id}?_method=PUT`)
+                .form-group
+                    label(for='youtubeId') Youtube ID:  
+                    input.form-control(type='text' name='youtubeId' value=`${video.youtubeID}` required)
+                .form-group
+                    label(for='title') Title:
+                    input.form-control(type='text' name='title' value=`${video.title}` required)
+                .row
+                    .col
+                        label(for='tags') Tags:
+                    .col
+                        input.form-control(type='text' name='tags' value=`${video.tags[0] !== 'undefined' ? video.tags[2] : ''}`)
+                    .col
+                        input.form-control(type='text' name='tags' value=`${video.tags[1] !== 'undefined' ? video.tags[2] : ''}`)
+                    .col
+                        input.form-control(type='text' name='tags' value=`${video.tags[2] !== 'undefined' ? video.tags[2] : ''}`)
+                    .col
+                        input.form-control(type='text' name='tags' value=`${video.tags[3] !== 'undefined' ? video.tags[2] : ''}`)
+                    .col
+                        input.form-control(type='text' name='tags' value=`${video.tags[4] !== 'undefined' ? video.tags[2] : ''}`)
+                .form-group
+                    label(for='notes') Notes:
+                    input.form-control(type='textarea' name='notes' value=`${video.notes}`)
+                button.btn.btn-outline-dark(type="submit") Save Changes
+                button.btn.btn-outline-dark(type="reset") Reset

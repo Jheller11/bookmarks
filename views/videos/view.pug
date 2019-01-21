@@ -1,0 +1,31 @@
+extends ../layout.pug
+
+block content
+    .nav.d-flex.justify-content-between
+        a.nav-link(href='/videos') Back
+    .card.p-2
+        .card-body
+            h4.card-title #{video.title}
+            .row
+                .col Created By: #{video.createdBy.name}
+                - let d = new Date(video.created)
+                - let year = d.getFullYear()
+                - let month = d.getMonth() + 1
+                - let date = d.getDate()
+                .col Date Added: #{month}-#{date}-#{year}
+            div Tags:
+            ul.d-flex
+                each tag in article.tags
+                    li.list-group-item #{tag}
+        h6 Notes:
+        div #{video.notes}
+        //- show video here
+        .nav
+            if (user && user.id === video.createdBy.id)
+                a.btn.nav-link.text-flame(href=`/videos/edit/${video.id}`) Edit         
+                form(method='POST' action=`/videos/${video.id}?_method=DELETE`)
+                    button.btn.nav-link.text-flame(type='submit') Delete
+            else
+                a.btn.nav-link.text-flame.disabled Edit
+                a.btn.nav-link.text-flame.disabled Delete  
+  
