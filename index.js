@@ -67,6 +67,16 @@ app.get('/*', (req, res) => {
   })
 })
 
+// custom error handler
+app.use((error, req, res, next) => {
+  if (error) {
+    res.render('error')
+  } else {
+    next()
+  }
+})
+
+// set port
 app.set('port', process.env.PORT || 4000)
 
 app.listen(app.get('port'), () =>

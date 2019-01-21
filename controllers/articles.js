@@ -10,7 +10,7 @@ router.get('/new', isLoggedIn, (req, res) => {
 })
 
 // keyword search
-router.post('/search', (req, res) => {
+router.post('/search', (req, res, next) => {
   let matchingArticles = []
   Article.find({})
     .then(articles => {
@@ -24,41 +24,45 @@ router.post('/search', (req, res) => {
       res.render('articles/search', { articles: matchingArticles })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // only articles added by an individual user
-router.get('/my_articles', isLoggedIn, (req, res) => {
-  Article.find({ createdBy: req.user.id }).then(articles => {
-    res.render('articles/index', { articles: articles })
-  })
+router.get('/my_articles', isLoggedIn, (req, res, next) => {
+  Article.find({ createdBy: req.user.id })
+    .then(articles => {
+      res.render('articles/index', { articles: articles })
+    })
+    .catch(err => {
+      next(err)
+    })
 })
 
 // only unread articles
-router.get('/unread', (req, res) => {
+router.get('/unread', (req, res, next) => {
   Article.find({ read: false })
     .then(articles => {
       res.render('articles/index', { articles: articles })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // only read articles
-router.get('/read', (req, res) => {
+router.get('/read', (req, res, next) => {
   Article.find({ read: true })
     .then(articles => {
       res.render('articles/index', { articles: articles })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // mark as unread
-router.put('/unread/:id', isAuthor, (req, res) => {
+router.put('/unread/:id', isAuthor, (req, res, next) => {
   Article.findOneAndUpdate(
     { _id: req.params.id },
     { read: false },
@@ -68,12 +72,12 @@ router.put('/unread/:id', isAuthor, (req, res) => {
       res.render('articles/view', { article: article })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // mark as read
-router.put('/read/:id', isAuthor, (req, res) => {
+router.put('/read/:id', isAuthor, (req, res, next) => {
   Article.findOneAndUpdate(
     { _id: req.params.id },
     { read: true },
@@ -83,34 +87,34 @@ router.put('/read/:id', isAuthor, (req, res) => {
       res.render('articles/view', { article: article })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // edit form
-router.get('/edit/:id', isAuthor, (req, res) => {
+router.get('/edit/:id', isAuthor, (req, res, next) => {
   Article.findOne({ _id: req.params.id })
     .then(article => {
       res.render('articles/edit', { article: article })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // view
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   Article.findOne({ _id: req.params.id })
     .then(article => {
       res.render('articles/view', { article: article })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // update
-router.put('/:id', isAuthor, (req, res) => {
+router.put('/:id', isAuthor, (req, res, next) => {
   let newTags = formatTags(req.body.tags)
   req.body.tags = newTags
   Article.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
@@ -118,34 +122,34 @@ router.put('/:id', isAuthor, (req, res) => {
       res.render('articles/view', { article: article })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // delete
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
   Article.findOneAndDelete({ _id: req.params.id })
     .then(() => {
       res.redirect('/articles')
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // index
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Article.find({})
     .then(articles => {
       res.render('articles/index', { articles: articles })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // post
-router.post('/', isLoggedIn, (req, res) => {
+router.post('/', isLoggedIn, (req, res, next) => {
   let newTags = formatTags(req.body.tags)
   User.findOne({ _id: req.user.id }).then(user => {
     let userInfo = { name: user.local.displayName, id: user.id }
@@ -160,7 +164,7 @@ router.post('/', isLoggedIn, (req, res) => {
         res.redirect('/articles')
       })
       .catch(err => {
-        console.log(err)
+        next(err)
       })
   })
 })

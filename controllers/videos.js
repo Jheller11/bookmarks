@@ -10,7 +10,7 @@ router.get('/new', (req, res) => {
 })
 
 // keyword search
-router.post('/search', (req, res) => {
+router.post('/search', (req, res, next) => {
   let matchingVideos = []
   Video.find({})
     .then(videos => {
@@ -24,41 +24,45 @@ router.post('/search', (req, res) => {
       res.render('videos/search', { videos: matchingVideos })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // only videos added by an individual user
-router.get('/my_videos', isLoggedIn, (req, res) => {
-  Video.find({ createdBy: req.user.id }).then(videos => {
-    res.render('articles/index', { videos: videos })
-  })
+router.get('/my_videos', isLoggedIn, (req, res, next) => {
+  Video.find({ createdBy: req.user.id })
+    .then(videos => {
+      res.render('articles/index', { videos: videos })
+    })
+    .catch(err => {
+      next(err)
+    })
 })
 
 // edit form
-router.get('/edit/:id', isAuthor, (req, res) => {
+router.get('/edit/:id', isAuthor, (req, res, next) => {
   Video.findOne({ _id: req.params.id })
     .then(video => {
       res.render('videos/edit', { video: video })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // view
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res, next) => {
   Video.findOne({ _id: req.params.id })
     .then(video => {
       res.render('videos/view', { video: video })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // update
-router.put('/:id', isAuthor, (req, res) => {
+router.put('/:id', isAuthor, (req, res, next) => {
   let newTags = formatTags(req.body.tags)
   req.body.tags = newTags
   Video.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
@@ -66,34 +70,34 @@ router.put('/:id', isAuthor, (req, res) => {
       res.render('videos/view', { video: video })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // delete
-router.delete('/:id', (req, res) => {
+router.delete('/:id', (req, res, next) => {
   Video.findOneAndDelete({ _id: req.params.id })
     .then(() => {
       res.redirect('/videos')
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // index
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Video.find({})
     .then(videos => {
       res.render('videos/index', { videos: videos })
     })
     .catch(err => {
-      console.log(err)
+      next(err)
     })
 })
 
 // post
-router.post('/', isLoggedIn, (req, res) => {
+router.post('/', isLoggedIn, (req, res, next) => {
   let newTags = formatTags(req.body.tags)
   User.findOne({ _id: req.user.id }).then(user => {
     let userInfo = { name: user.local.displayName, id: user.id }
@@ -108,7 +112,7 @@ router.post('/', isLoggedIn, (req, res) => {
         res.redirect('/videos')
       })
       .catch(err => {
-        console.log(err)
+        next(err)
       })
   })
 })
