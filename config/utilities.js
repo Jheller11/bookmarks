@@ -8,6 +8,7 @@ const utils = {
       message: 'You must be logged in to view this page.'
     })
   },
+  // check that current user is post author for editing/deleting rights
   isAuthor: (req, res, next) => {
     Article.findOne({ _id: req.params.id }).then(article => {
       if (req.user && req.user.id === article.createdBy.id) {
@@ -21,6 +22,7 @@ const utils = {
       }
     })
   },
+  // strip empty tags and enter as lowercase
   formatTags: arr => {
     let tags = arr.filter(tag => tag.length > 0)
     return tags.map(tag => tag.toLowerCase())

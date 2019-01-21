@@ -1,3 +1,9 @@
 main {
   min-height: 550px;
 }
+
+.article-list-item:hover {
+  text-decoration: none;
+  transform: translate(1px, -1px);
+  box-shadow: 1px 1px 1px 1px lightgray;
+}
