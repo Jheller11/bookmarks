@@ -7,3 +7,9 @@ main {
   transform: translate(1px, -1px);
   box-shadow: 1px 1px 1px 1px lightgray;
 }
+
+.video-list-item:hover {
+  text-decoration: none;
+  transform: translate(-1px, -1px);
+  box-shadow: 1px 1px 1px 1px lightgray;
+}

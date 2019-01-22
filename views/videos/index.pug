@@ -19,6 +19,14 @@ block content
                 i.fas.fa-search
 
     .container-fluid
-        .row
-        .row
+        .row.d-flex.flex-wrap
+            each video in videos
+                .card.w-25
+                    a.video-list-item.card-body.text-dark(href=`/videos/${video.id}`)
+                        h5.card-title #{video.title}
+                        p.card-text #{video.createdBy.name}
+                        - let tags = video.tags.join(', ')
+                        small.card-text.text-flame #{tags}
+
+
 

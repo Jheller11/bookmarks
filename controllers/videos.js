@@ -30,9 +30,11 @@ router.post('/search', (req, res, next) => {
 
 // only videos added by an individual user
 router.get('/my_videos', isLoggedIn, (req, res, next) => {
-  Video.find({ createdBy: req.user.id })
+  console.log('here at line 33')
+  Video.find({ 'createdBy.id': req.user.id })
     .then(videos => {
-      res.render('articles/index', { videos: videos })
+      console.log(videos + 'line 36')
+      res.render('videos/index', { videos: videos })
     })
     .catch(err => {
       next(err)
