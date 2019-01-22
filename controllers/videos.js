@@ -11,6 +11,7 @@ router.get('/new', (req, res) => {
 
 // keyword search
 router.post('/search', (req, res, next) => {
+  console.log('here' + req.body)
   let matchingVideos = []
   Video.find({})
     .then(videos => {
@@ -30,10 +31,8 @@ router.post('/search', (req, res, next) => {
 
 // only videos added by an individual user
 router.get('/my_videos', isLoggedIn, (req, res, next) => {
-  console.log('here at line 33')
   Video.find({ 'createdBy.id': req.user.id })
     .then(videos => {
-      console.log(videos + 'line 36')
       res.render('videos/index', { videos: videos })
     })
     .catch(err => {

@@ -25,8 +25,10 @@ block content
                     a.video-list-item.card-body.text-dark(href=`/videos/${video.id}`)
                         h5.card-title #{video.title}
                         p.card-text #{video.createdBy.name}
-                        - let tags = video.tags.join(', ')
-                        small.card-text.text-flame #{tags}
+                        each tag in video.tags
+                            form.d-inline-block.mr-1(action="/videos/search", method="POST")
+                                input(type='hidden' name='query' value=`${tag}`)
+                                button.btn.btn-light.btn-sm(type='submit') #{tag}
 
 
 
