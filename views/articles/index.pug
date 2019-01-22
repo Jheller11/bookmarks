@@ -4,8 +4,6 @@ block content
     .nav.d-flex.justify-content-between
         div.d-flex.flex-row
             a.nav-link(href='/articles') All
-            a.nav-link(href='/articles/unread') Unread
-            a.nav-link(href='/articles/read') Read
             if (user)
                 a.nav-link(href='/articles/my_articles') My Articles
                 a.nav-link(href='/articles/new') New 
@@ -21,36 +19,16 @@ block content
                 i.fas.fa-search
 
     .card.d-flex.flex-row.p-2
-        small.mr-4 Unread 
-            i.far.fa-circle.text-flame
-        small.mr-4 Read 
-            i.far.fa-check-circle.text-blue
         small #{articles.length} total articles
     .container-fluid
-        .row.mt-2
-            .card.col-8
-                .card-body
-                    each article, index in articles
-                        if (article.read)
-                            div.mt-1
-                                a.d-flex.flex-row.justify-content-between.article-list-item.p-1(href=`/articles/${article.id}`)
-                                    span.text-dark #{index + 1}. 
-                                    div.w-75.text-truncate.text-dark #{article.title}
-                                    div.text-secondary #{article.createdBy.name}      
-                                        i.far.fa-check-circle.text-blue          
-                        else 
-                            div.mt-1
-                                a.d-flex.flex-row.justify-content-between.article-list-item.p-1(href=`/articles/${article.id}`) 
-                                    span.text-dark #{index + 1}. 
-                                    div.w-75.text-truncate.text-dark #{article.title}
-                                    div.text-secondary #{article.createdBy.name} 
-                                        i.far.fa-circle.text-flame
-            .col-4
-                .card.my-1
-                    .card-body
-                        .card-text.text-secondary Articles, tutorials, and documentation.
-                            if (!user)
-                                div.mt-2 Sign in or create and save to create a personalized list.
-                            else
-                                div.mt-2 Click "My Articles" above to view only articles you've posted or "All" to see posts from all users.
+        .row.d-flex.flex-wrap
+            each article in articles
+                .card.w-25
+                    a.article-list-item.card-body.text-dark(href=`/articles/${article.id}`)
+                        h5.card-title #{article.title}
+                        p.card-text.text-muted #{article.createdBy.name}
+                        each tag in article.tags
+                            form.d-inline-block.mr-1(action="/articles/search", method="POST")
+                                input(type='hidden' name='query' value=`${tag}`)
+                                button.btn.btn-light.btn-sm.text-flame(type='submit') #{tag}
 

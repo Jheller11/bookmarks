@@ -6,11 +6,7 @@ const articleSchema = new mongoose.Schema({
     required: true,
     default: Date.now()
   },
-  read: {
-    type: Boolean,
-    required: true,
-    default: false
-  },
+
   tags: {
     type: Array,
     default: []

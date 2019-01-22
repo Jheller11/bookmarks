@@ -4,12 +4,24 @@ main {
 
 .article-list-item:hover {
   text-decoration: none;
-  transform: translate(1px, -1px);
-  box-shadow: 1px 1px 1px 1px lightgray;
+  transform: translate(-1px, -1px);
+  box-shadow: 1px 1px 1px 1px #bfb7b6;
 }
 
 .video-list-item:hover {
   text-decoration: none;
   transform: translate(-1px, -1px);
-  box-shadow: 1px 1px 1px 1px lightgray;
+  box-shadow: 1px 1px 1px 1px #bfb7b6;
+}
+
+.article-list-item:after {
+  content: '';
+  display: block;
+  padding-top: 50%;
+}
+
+.video-list-item:after {
+  content: '';
+  display: block;
+  padding-top: 50%;
 }

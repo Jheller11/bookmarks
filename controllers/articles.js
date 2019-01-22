@@ -39,58 +39,6 @@ router.get('/my_articles', isLoggedIn, (req, res, next) => {
     })
 })
 
-// only unread articles
-router.get('/unread', (req, res, next) => {
-  Article.find({ read: false })
-    .then(articles => {
-      res.render('articles/index', { articles: articles })
-    })
-    .catch(err => {
-      next(err)
-    })
-})
-
-// only read articles
-router.get('/read', (req, res, next) => {
-  Article.find({ read: true })
-    .then(articles => {
-      res.render('articles/index', { articles: articles })
-    })
-    .catch(err => {
-      next(err)
-    })
-})
-
-// mark as unread
-router.put('/unread/:id', isAuthor, (req, res, next) => {
-  Article.findOneAndUpdate(
-    { _id: req.params.id },
-    { read: false },
-    { new: true }
-  )
-    .then(article => {
-      res.render('articles/view', { article: article })
-    })
-    .catch(err => {
-      next(err)
-    })
-})
-
-// mark as read
-router.put('/read/:id', isAuthor, (req, res, next) => {
-  Article.findOneAndUpdate(
-    { _id: req.params.id },
-    { read: true },
-    { new: true }
-  )
-    .then(article => {
-      res.render('articles/view', { article: article })
-    })
-    .catch(err => {
-      next(err)
-    })
-})
-
 // edit form
 router.get('/edit/:id', isAuthor, (req, res, next) => {
   Article.findOne({ _id: req.params.id })

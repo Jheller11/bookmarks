@@ -24,11 +24,11 @@ block content
                 .card.w-25
                     a.video-list-item.card-body.text-dark(href=`/videos/${video.id}`)
                         h5.card-title #{video.title}
-                        p.card-text #{video.createdBy.name}
+                        p.card-text.text-muted #{video.createdBy.name}
                         each tag in video.tags
                             form.d-inline-block.mr-1(action="/videos/search", method="POST")
                                 input(type='hidden' name='query' value=`${tag}`)
-                                button.btn.btn-light.btn-sm(type='submit') #{tag}
+                                button.btn.btn-light.btn-sm.text-flame(type='submit') #{tag}
 
 
 

@@ -57,7 +57,7 @@ app.get('/about', (req, res) => {
 
 // render home page
 app.get('/', (req, res) => {
-  res.redirect('/articles')
+  res.render('home')
 })
 
 // 404
