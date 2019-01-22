@@ -30,7 +30,7 @@ router.post('/search', (req, res, next) => {
 
 // only articles added by an individual user
 router.get('/my_articles', isLoggedIn, (req, res, next) => {
-  Article.find({ createdBy: req.user.id })
+  Article.find({ 'createdBy.id': req.user.id })
     .then(articles => {
       res.render('articles/index', { articles: articles })
     })
