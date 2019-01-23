@@ -3,10 +3,10 @@ extends ../layout.pug
 block content
     .nav.d-flex.justify-content-between
         div.d-flex.flex-row
-            a.nav-link(href='/articles') All
+            a.nav-link.text-flame(href='/articles') All
             if (user)
-                a.nav-link(href='/articles/my_articles') My Articles
-                a.nav-link(href='/articles/new') New 
+                a.nav-link.text-flame(href='/articles/my_articles') My Articles
+                a.nav-link.text-flame(href='/articles/new') New 
                     i.far.fa-plus-square
             else
                 a.nav-link.disabled(href='/articles/my_articles') My Articles
@@ -23,7 +23,7 @@ block content
     .container-fluid
         .row.d-flex.flex-wrap
             each article in articles
-                .card.w-25.my-1
+                .card.w-25.my-2
                     a.article-list-item.card-body.text-dark(href=`/articles/${article.id}`)
                         h5.card-title #{article.title}
                         p.card-text.text-muted #{article.createdBy.name}

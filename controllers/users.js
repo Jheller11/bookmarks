@@ -12,10 +12,14 @@ router.get('/signup', (req, res) => {
   res.render('users/signup', { message: req.flash('signupMessage') })
 })
 
+router.get('/profile', isLoggedIn, (req, res) => {
+  res.render('users/profile')
+})
+
 router.post(
   '/login',
   passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/users/profile',
     failureRedirect: '/users/login',
     failureFlash: true
   })
@@ -24,7 +28,7 @@ router.post(
 router.post(
   '/signup',
   passport.authenticate('local-signup', {
-    successRedirect: '/',
+    successRedirect: '/users/profile',
     failureRedirect: '/users/signup',
     failureFlash: true
   })
