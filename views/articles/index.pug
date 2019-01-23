@@ -23,7 +23,7 @@ block content
     .container-fluid
         .row.d-flex.flex-wrap
             each article in articles
-                .card.w-25
+                .card.w-25.my-1
                     a.article-list-item.card-body.text-dark(href=`/articles/${article.id}`)
                         h5.card-title #{article.title}
                         p.card-text.text-muted #{article.createdBy.name}

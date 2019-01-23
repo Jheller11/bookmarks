@@ -1,4 +1,7 @@
 const Article = require('../models/Article')
+// request-promise and cheerio used for scraping info from links
+const rp = require('request-promise')
+const $ = require('cheerio')
 
 const utils = {
   // check for logged in user
@@ -26,6 +29,18 @@ const utils = {
   formatTags: arr => {
     let tags = arr.filter(tag => tag.length > 0)
     return tags.map(tag => tag.toLowerCase())
+  },
+  // scrape title from url entered by user
+  scrapeTitle: url => {
+    rp(url)
+      .then(html => {
+        let title = $('title', html).text()
+        return title
+      })
+      .catch(err => {
+        console.log(err)
+        return 'Title not found'
+      })
   }
 }
 
