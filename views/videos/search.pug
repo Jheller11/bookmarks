@@ -9,10 +9,17 @@ block content
             button.btn.btn-outline-dark.nav-link(type='submit') 
                 i.fas.fa-search
 
-    div.text-flame #{videos.length} matching videos found.
-    if (videos.length < 1)
-        p Please try again.
-    .list-group
-        each video in videos
-            a.list-group-item.list-group-item-action.border-flame(href=`/videos/${video.id}`) #{video.title}
+    .card.d-flex.flex-row.p-2
+        small #{videos.length} videos found.
+    .container-fluid
+        .row.d-flex.flex-wrap
+            each video in videos
+                .card.w-25
+                    a.video-list-item.card-body.text-dark(href=`/videos/${video.id}`)
+                        h5.card-title #{video.title}
+                        p.card-text.text-muted #{video.createdBy.name}
+                        each tag in video.tags
+                            form.d-inline-block.mr-1(action="/videos/search", method="POST")
+                                input(type='hidden' name='query' value=`${tag}`)
+                                button.btn.btn-light.btn-sm.text-flame(type='submit') #{tag}
 

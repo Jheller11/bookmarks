@@ -21,7 +21,6 @@ This application will allow me to bookmark and save all useful articles, stack o
 
 1. Develop Home page
 2. Develop Profile Page
-3. Redo article index like video index
-4. "" "" search pages.
-5. Add more test coverage for edge cases, error handling.
-6. Make ready to deploy.
+3. "" "" search pages.
+4. Add more test coverage for edge cases, error handling.
+5. Make ready to deploy.

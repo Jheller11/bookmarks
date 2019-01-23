@@ -3,10 +3,10 @@ const chaiHttp = require('chai-http')
 
 chai.use(chaiHttp)
 
-const url = 'http://localhost:4000'
+const url = 'http://localhost:4000/videos'
 const expect = chai.expect
 
-describe('Server', () => {
+describe('Video Controller', () => {
   it('server should respond with 200', done => {
     chai
       .request(url)
@@ -17,15 +17,13 @@ describe('Server', () => {
         done()
       })
   })
-  it('should return my 404 message when route not found', done => {
+  it('should error when route not found', done => {
     chai
       .request(url)
       .get('/badurl')
       .end(function(error, response) {
         expect(error).to.be.null
-        expect(response.text).to.have.string(
-          'The page you requested does not exist. Please try again.'
-        )
+        expect(response.text).to.have.string('Please try again.')
         done()
       })
   })
