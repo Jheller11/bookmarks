@@ -1,3 +1,31 @@
 extends layout.pug
 
 block content
+    .jumbotron
+        p.lead.text-center Jeff's Links
+        hr.mt-4
+        .container-fluid
+            .row.py-4
+                .col-sm-6 
+                    h3.text-center 
+                        p.text-flame 
+                            i.far.fa-newspaper
+                        a.text-dark(href='/articles') Articles
+                    p.lead.px-4.text-center View saved articles, tutorials, stack overflow questions and other resources.
+                .col-sm-6
+                    h3.text-center
+                        p.text-flame 
+                            i.fab.fa-youtube
+                        a.text-dark(href='/videos')  Videos
+                    p.lead.px-4.text-center Links to talks, tutorials, and other code related video content.
+            .row.my-4
+                .col-sm-6.m-auto
+                    h3.text-center 
+                        p.text-flame 
+                            i.far.fa-newspaper
+                        div Custom List
+                    p.lead.px-4.text-center
+                        a.text-flame(href='/users/signup') Register 
+                        span or 
+                        a.text-flame(href='/users/login') Log In 
+                        span to start posting and saving your own lists of articles or videos.  Click 'My Articles' or 'My Videos' to see only your content.        

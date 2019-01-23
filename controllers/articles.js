@@ -2,7 +2,12 @@ const express = require('express')
 const router = express.Router()
 const Article = require('../models/Article')
 const User = require('../models/User')
-const { isLoggedIn, isAuthor, formatTags } = require('../config/utilities')
+const {
+  isLoggedIn,
+  isAuthor,
+  formatTags,
+  scrapeTitle
+} = require('../config/utilities')
 
 // form for new article
 router.get('/new', isLoggedIn, (req, res) => {
@@ -99,22 +104,20 @@ router.get('/', (req, res, next) => {
 // post
 router.post('/', isLoggedIn, (req, res, next) => {
   let newTags = formatTags(req.body.tags)
-  User.findOne({ _id: req.user.id }).then(user => {
-    let userInfo = { name: user.local.displayName, id: user.id }
-    Article.create({
-      title: req.body.title,
-      url: req.body.url,
-      tags: newTags,
-      notes: req.body.notes,
-      createdBy: userInfo
-    })
-      .then(article => {
-        res.redirect('/articles')
-      })
-      .catch(err => {
-        next(err)
-      })
+  Article.create({
+    title: req.body.title,
+    url: req.body.url,
+    tags: newTags,
+    notes: req.body.notes,
+    'createdBy.name': req.user.local.displayName,
+    'createdBy.id': req.user.id
   })
+    .then(article => {
+      res.redirect('/articles')
+    })
+    .catch(err => {
+      next(err)
+    })
 })
 
 module.exports = router

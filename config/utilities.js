@@ -38,8 +38,7 @@ const utils = {
         return title
       })
       .catch(err => {
-        console.log(err)
-        return 'Title not found'
+        return false
       })
   }
 }
