@@ -117,11 +117,4 @@ router.post('/', isLoggedIn, (req, res, next) => {
   })
 })
 
-// 404
-router.get('/*', (req, res) => {
-  res.render('404', {
-    message: 'The page you requested does not exist. Please try again.'
-  })
-})
-
 module.exports = router

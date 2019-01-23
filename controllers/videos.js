@@ -11,7 +11,6 @@ router.get('/new', (req, res) => {
 
 // keyword search
 router.post('/search', (req, res, next) => {
-  console.log('here' + req.body)
   let matchingVideos = []
   Video.find({})
     .then(videos => {
@@ -115,13 +114,6 @@ router.post('/', isLoggedIn, (req, res, next) => {
       .catch(err => {
         next(err)
       })
-  })
-})
-
-// 404
-router.get('/*', (req, res) => {
-  res.render('404', {
-    message: 'The page you requested does not exist. Please try again.'
   })
 })
 
