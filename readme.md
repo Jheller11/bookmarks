@@ -19,7 +19,6 @@ This application will allow me to bookmark and save all useful articles, stack o
 
 ## Remaining tasks
 
-1. Develop Profile Page
-2. Develop View Page
-3. Add more test coverage for edge cases, error handling.
-4. Make ready to deploy.
+1. Develop View Page
+2. Add more test coverage for edge cases, error handling.
+3. Make ready to deploy.
