@@ -3,20 +3,46 @@ extends ../layout.pug
 block content
     //- content to include [Username, Edit Account(username, password), Links(my articles, my videos, new article, new video, search)]
     .container-fluid
-        .row
+        .row.py-2.align-items-center
             .col-sm-6
-                .card
-                    .card-body
-                        h4.card-title.text-flame User Info
-                        p.card-text Username: 
-                            span.text-flame #{user.local.displayName}
-                        p.card-text Email: 
-                            span.text-flame #{user.local.email}
-                        p.d-flex.justify-content-around
-                            a.btn.btn-light.btn-sm.border-dark(href='#') Edit Username
-                            a.btn.btn-light.btn-sm.border-dark(href='#') Change Password
+                div
+                    h4.text-flame User Info
+                    .card-text Username: 
+                        span.text-flame #{user.local.displayName}
+                    .card-text Email: 
+                        span.text-flame #{user.local.email}
+                    .btn-group.pt-2
+                        a.btn.btn-outline-dark.btn-sm.border-dark(href='#') Edit Username
+                        a.btn.btn-outline-dark.btn-sm.border-dark(href='#') Change Password
 
+
+        hr.my-4
+        .row.py-2.align-items-center
             .col-sm-6
+                div
+                    h4.text-flame Links
+                    .btn-group
+                        a.btn.btn-outline-dark.btn-sm.border-dark(href='/articles/my_articles') My Articles
+                        a.btn.btn-outline-dark.btn-sm.border-dark(href='/videos/my_videos') My Videos
+                        a.btn.btn-outline-dark.btn-sm.border-dark(href='/articles/new') New Article
+                        a.btn.btn-outline-dark.btn-sm.border-dark(href='/videos/new') New Video
+        hr.my-4
         .row
             .col-sm-6
-            .col-sm-6
+                h4.text-flame Search:
+                div
+                    form.form-inline(method='POST' action="/videos/search")
+                        label.mr-2(for='query') Video Search:  
+                        input.form-control.mr-2(type='text' name='query' required)
+                        button.btn.btn-outline-dark.nav-link(type='submit') 
+                            i.fas.fa-search
+                div
+                    form.form-inline(method='POST' action="/articles/search")
+                        label.mr-2(for='query') Article Search:  
+                        input.form-control.mr-2(type='text' name='query' required)
+                        button.btn.btn-outline-dark.nav-link(type='submit') 
+                            i.fas.fa-search
+
+
+
+
