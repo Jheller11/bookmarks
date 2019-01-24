@@ -59,6 +59,8 @@ router.get('/edit/:id', isAuthor, (req, res, next) => {
 router.get('/:id', (req, res, next) => {
   Article.findOne({ _id: req.params.id })
     .then(article => {
+      article.views += 1
+      article.save()
       res.render('articles/view', { article: article })
     })
     .catch(err => {

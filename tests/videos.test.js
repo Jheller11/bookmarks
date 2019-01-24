@@ -25,7 +25,9 @@ describe('Video Controller', () => {
       .get('/badurl')
       .end(function(error, response) {
         expect(error).to.be.null
-        expect(response.text).to.have.string('Please try again.')
+        expect(response.text).to.have.string(
+          'The page you requested cannot be found. Please try again.'
+        )
         done()
       })
   })

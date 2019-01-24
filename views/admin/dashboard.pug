@@ -3,9 +3,20 @@ extends ../layout.pug
 block content
     .container-fluid
         .row
-            .col Success
-            .col
-        .row
-            .col
-            .col
-            .col
+            .col-sm-6 
+                h3.text-flame Users
+                small.text-blue #{users.length} total users.
+                table.table
+                    thead.thead-light
+                        tr
+                            th(scope='col') #
+                            th(scope='col') Username
+                            th(scope='col') Email
+                            th(scope='col') ID
+                    tbody
+                        each user, i in users
+                            tr
+                                td(scope='row') #{i + 1}
+                                td #{user.local.displayName}
+                                td #{user.local.email}
+                                td #{user._id}

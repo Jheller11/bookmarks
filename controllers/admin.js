@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 require('dotenv').config()
+const User = require('../models/User')
 
 // access point to admin dashboard
 router.get('/login', (req, res) => {
@@ -22,7 +23,9 @@ router.post('/login', (req, res) => {
 
 //  view dashboard
 router.get('/dashboard', (req, res) => {
-  res.render('admin/dashboard')
+  User.find({}).then(users => {
+    res.render('admin/dashboard', { users: users })
+  })
 })
 
 module.exports = router

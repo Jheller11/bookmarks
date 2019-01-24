@@ -71,7 +71,13 @@ app.get('/*', (req, res) => {
 app.use((error, req, res, next) => {
   if (error) {
     console.log(error)
-    res.render('error')
+    if (error.name === 'CastError') {
+      res.render('404', {
+        message: 'The page you requested cannot be found. Please try again.'
+      })
+    } else {
+      res.render('error')
+    }
   } else {
     next()
   }

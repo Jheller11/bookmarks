@@ -24,6 +24,10 @@ const articleSchema = new mongoose.Schema({
   url: {
     type: String,
     required: true
+  },
+  views: {
+    type: Number,
+    default: 0
   }
 })
 
